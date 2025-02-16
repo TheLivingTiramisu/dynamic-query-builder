@@ -1,2 +1,4 @@
-const prisma = require("./prisma/index");
-console.log(prisma.buildPrismaQuery({ name_eq: "John" }));
+exports.prisma = require("./prisma/index");
+exports.mongoose = require("./mongoose/index");
+exports.sequelize = require("./sequelize/index");
+exports.typeorm = require("./typeorm/index");

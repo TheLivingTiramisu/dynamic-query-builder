@@ -6,9 +6,27 @@
 
 The `buildPrismaQuery` function builds a Prisma query based on flat filter conditions.
 
+### Mongoose query builder
+
+#### `buildMongooseQuery` Function
+
+The `buildMongooseQuery` function builds a Mongoose query based on flat filter conditions.
+
+### TypeORM query builder
+
+#### `buildTypeORMQuery` Function
+
+The `buildTypeORMQuery` function builds a TypeORM query based on flat filter conditions.
+
+### Sequelize query builder
+
+#### `buildSequelizeQuery` Function
+
+The `buildSequelizeQuery` function builds a Sequelize query based on flat filter conditions. Here you also need to provide `Op` object from `sequelize`.
+
 ##### Usage
 
-This function takes an object of flat filter conditions and converts it into a Prisma-compatible query object. The filter conditions are expected to be in the format of `field_condition: value`, where `field` is the name of the field to filter on and `condition` is the type of filter to apply.
+This functions take an object of flat filter conditions and converts it into a ORM query object. The filter conditions are expected to be in the format of `field_condition: value`, where `field` is the name of the field to filter on and `condition` is the type of filter to apply.
 
 ##### Supported Conditions
 

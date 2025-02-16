@@ -1,7 +1,7 @@
 /**
- * Builds a Prisma query based on flat filter conditions.
+ * Builds a TypeORM query based on flat filter conditions.
  * @param filters - The flat filter conditions.
- * @returns - The Prisma-compatible query object.
+ * @returns - The TypeORM-compatible query object.
  */
 module.exports = buildQuery = (filters) => {
   delete filters.limit;
@@ -14,27 +14,22 @@ module.exports = buildQuery = (filters) => {
       const [field, condition] = key.split("_");
       const value = filters[key];
 
-      if (!query[field]) {
-        query[field] = {};
-      }
-
       switch (condition) {
         case "lt":
-          query[field].lt = value;
+          query[field] = { $lt: value };
           break;
         case "lte":
-          query[field].lte = value;
+          query[field] = { $lte: value };
           break;
         case "gt":
-          query[field].gt = value;
+          query[field] = { $gt: value };
           break;
         case "gte":
-          query[field].gte = value;
+          query[field] = { $gte: value };
           break;
         case "between":
           if (Array.isArray(value) && value.length === 2) {
-            query[field].gte = value[0];
-            query[field].lte = value[1];
+            query[field] = { $gte: value[0], $lte: value[1] };
           } else {
             throw new Error(
               "The 'between' filter requires an array with two values."
@@ -43,15 +38,14 @@ module.exports = buildQuery = (filters) => {
           break;
         case "contains":
         case "c":
-          query[field].contains = value;
+          query[field] = { $like: `%${value}%` };
           break;
         case "caseSensitiveContains":
         case "csc":
-          query[field].contains = value;
-          query[field].mode = "default";
+          query[field] = { $like: value };
           break;
         case "ne":
-          query[field].not = value;
+          query[field] = { $ne: value };
           break;
         case "eq":
         case "":
@@ -59,13 +53,13 @@ module.exports = buildQuery = (filters) => {
           break;
         case "neContains":
         case "nec":
-          query[field].not = { contains: value };
+          query[field] = { $not: { $like: `%${value}%` } };
           break;
         case "in":
-          query[field].in = value;
+          query[field] = { $in: value };
           break;
         case "nin":
-          query[field].notIn = value;
+          query[field] = { $nin: value };
           break;
         default:
           break;

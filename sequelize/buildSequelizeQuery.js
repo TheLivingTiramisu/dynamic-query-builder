@@ -1,9 +1,12 @@
 /**
- * Builds a Prisma query based on flat filter conditions.
+ * Builds a Sequelize query based on flat filter conditions.
  * @param filters - The flat filter conditions.
- * @returns - The Prisma-compatible query object.
+ * @returns - The Sequelize-compatible query object.
  */
-module.exports = buildQuery = (filters) => {
+module.exports = buildQuery = (filters, Op) => {
+  if (!Op) {
+    throw new Error(`Please provide the Op object from Sequelize.`);
+  }
   delete filters.limit;
   delete filters.page;
   delete filters.sort;
@@ -14,27 +17,22 @@ module.exports = buildQuery = (filters) => {
       const [field, condition] = key.split("_");
       const value = filters[key];
 
-      if (!query[field]) {
-        query[field] = {};
-      }
-
       switch (condition) {
         case "lt":
-          query[field].lt = value;
+          query[field] = { [Op.lt]: value };
           break;
         case "lte":
-          query[field].lte = value;
+          query[field] = { [Op.lte]: value };
           break;
         case "gt":
-          query[field].gt = value;
+          query[field] = { [Op.gt]: value };
           break;
         case "gte":
-          query[field].gte = value;
+          query[field] = { [Op.gte]: value };
           break;
         case "between":
           if (Array.isArray(value) && value.length === 2) {
-            query[field].gte = value[0];
-            query[field].lte = value[1];
+            query[field] = { [Op.between]: value };
           } else {
             throw new Error(
               "The 'between' filter requires an array with two values."
@@ -43,15 +41,14 @@ module.exports = buildQuery = (filters) => {
           break;
         case "contains":
         case "c":
-          query[field].contains = value;
+          query[field] = { [Op.like]: `%${value}%` };
           break;
         case "caseSensitiveContains":
         case "csc":
-          query[field].contains = value;
-          query[field].mode = "default";
+          query[field] = { [Op.like]: value };
           break;
         case "ne":
-          query[field].not = value;
+          query[field] = { [Op.ne]: value };
           break;
         case "eq":
         case "":
@@ -59,13 +56,13 @@ module.exports = buildQuery = (filters) => {
           break;
         case "neContains":
         case "nec":
-          query[field].not = { contains: value };
+          query[field] = { [Op.notLike]: `%${value}%` };
           break;
         case "in":
-          query[field].in = value;
+          query[field] = { [Op.in]: value };
           break;
         case "nin":
-          query[field].notIn = value;
+          query[field] = { [Op.notIn]: value };
           break;
         default:
           break;
