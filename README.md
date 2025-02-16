@@ -53,7 +53,7 @@ This functions take an object of flat filter conditions and converts it into a O
 
 ##### Returns
 
-- (Object): The Prisma-compatible query object.
+- (Object): The ORM query object.
 
 ##### Throws
 

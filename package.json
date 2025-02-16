@@ -1,7 +1,7 @@
 {
   "name": "dynamic-query-builder",
-  "version": "2.0.6",
-  "description": "build dynamic queries for ORMs",
+  "version": "2.0.7",
+  "description": "A dynamic query builder for Node.js",
   "main": "index.js",
   "scripts": {
     "test": "test"
@@ -43,5 +43,9 @@
     "database-querybuilder-orm"
   ],
   "author": "Elnur Maharramov",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elnur21/dynamic-query-builder"
+  }
 }
