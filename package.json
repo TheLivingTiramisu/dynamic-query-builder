@@ -1,0 +1,18 @@
+{
+  "name": "dynamic-query-builder",
+  "version": "1.0.0",
+  "description": "build dynamic queries for ORMs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "prisma",
+    "postgresql",
+    "sequilize",
+    "mongoose",
+    "typeorm"
+  ],
+  "author": "Elnur Maharramov",
+  "license": "ISC"
+}
